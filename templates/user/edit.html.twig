@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MàJ Utilisateur{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="justify-content-center mt-5">
+    <h1>Mise à jour mon profile</h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+
+        {# <a href="{{ path('user_index') }}">back to list</a> #}
+
+        {# {{ include('user/_delete_form.html.twig') }} #}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livre Index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+                <h2>Liste des livres</h2>
+
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for livre in livres %}
+                        <tr>
+                            <td>{{ livre.id }}</td>
+                            <td>{{ livre.titre }}</td>
+                            <td>{{ livre.auteur }}</td>
+                            <td>
+                                <a href="{{ path('livre_show', { 'id': livre.id }) }}">
+                                    <button class="btn btn-sm btn-secondary">Afficher</button>
+                                </a>
+                                {% if is_granted('ROLE_ADMIN') == true %}
+                                <a href="{{ path('livre_edit', { 'id': livre.id }) }}">
+                                    <button class="btn btn-sm btn-primary">Modifier</button>
+                                </a>
+                                {% endif %}
+                                {% set emp= false %}
+                                <a href="{{ path('emprunt', { 'id': livre.id }) }}">
+                                {% for user in livre.users %}
+                                    {% if user==app.user %}
+                                        <button class="btn btn-sm btn-danger">Retourner</button>
+                                        {% set emp= true %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if emp==false %}
+                                <button class="btn btn-sm btn-success">Emprunter</button>
+                                {% endif %}
+                                </a>
+            
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">Aucun livre trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if is_granted('ROLE_ADMIN') == true %}
+                    <a href="{{ path('livre_new') }}"><button class="btn btn-sm btn-success">Ajouter un livre</button></a>
+                {% endif %}
+        </div>
+
+        <div class="row mt-5">
+            {% if is_granted('ROLE_ADMIN') == true %}
+                <div class="col-md-4">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Livres empruntés</th>
+                            <th>Emprunté par</th>
+                        </thead>
+                        <tbody>
+                        {% for livre in livres %}
+                            {% for user in livre.users %}
+                                <tr>
+                                    <td>{{ livre.titre }}</td>
+                                    <td>{{ user.username }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') == false %}
+                <div class="col-md-4">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Empruntés par vous</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for livre in livres %}
+                            {% for user in livre.users %}
+                                <tr>
+                                {% if user == app.user %}
+                                    <td>{{ livre.titre }}</td>
+                                {% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

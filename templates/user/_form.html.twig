@@ -1,0 +1,50 @@
+
+{{ form_start(form,  {'attr': {'class': 'form-horizontal'}}) }}
+<fieldset>
+    <div class="control-group">
+        <label class="control-label">{{ form_label(form.email) }}</label>
+        <div class="controls">
+            {{ form_widget(form.email, {'attr': {'class': 'input-xlarge'}}) }}
+            <p class="help-block"></p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ form_label(form.username) }}</label>
+        <div class="controls">
+            {{ form_widget(form.username, {'attr': {'class': 'input-xlarge'}}) }}
+            <p class="help-block"></p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">{{ form_label(form.nom) }}</label>
+        <div class="controls">
+            {{ form_widget(form.nom, {'attr': {'class': 'input-xlarge'}}) }}
+            <p class="help-block"></p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">{{ form_label(form.prenom) }}</label>
+        <div class="controls">
+            {{ form_widget(form.prenom, {'attr': {'class': 'input-xlarge'}}) }}
+            <p class="help-block"></p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">{{ form_label(form.isActive) }}</label>
+        <div class="controls">
+            {{ form_widget(form.isActive, {'attr': {'class': 'input-xlarge'}}) }}
+            <p class="help-block"></p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
+        </div>
+    </div>
+
+</fieldset>
+{{ form_end(form) }}

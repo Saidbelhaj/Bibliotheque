@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MàJ Utilisateur{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="justify-content-center mt-5">
+            <h1>Mise à jour mon profile</h1>
+
+
+            {{ form_start(accountForm,  {'attr': {'class': 'form-horizontal'}}) }}
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(accountForm.email) }}</label>
+                    <div class="controls">
+                        {{ form_widget(accountForm.email, {'attr': {'class': 'input-xlarge'}}) }}
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(accountForm.username) }}</label>
+                    <div class="controls">
+                        {{ form_widget(accountForm.username, {'attr': {'class': 'input-xlarge'}}) }}
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(accountForm.nom) }}</label>
+                    <div class="controls">
+                        {{ form_widget(accountForm.nom, {'attr': {'class': 'input-xlarge'}}) }}
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">{{ form_label(accountForm.prenom) }}</label>
+                    <div class="controls">
+                        {{ form_widget(accountForm.prenom, {'attr': {'class': 'input-xlarge'}}) }}
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button class="btn btn-sm btn-success">{{ button_label|default('Modifier') }}</button>
+                    </div>
+                </div>
+
+            </fieldset>
+            {{ form_end(accountForm) }}
+
+        </div>
+    </div>
+{% endblock %}

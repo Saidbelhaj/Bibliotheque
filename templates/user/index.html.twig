@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateurs Index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <h2>Liste des utilisateurs</h2>
+
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Actif</th>
+                    <th scope="col">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.roles[0] == 'ROLE_ADMIN' %}
+                                Administrateur
+                            {% endif %}
+                            {% if user.roles[0] == 'ROLE_USER' %}
+                                Etudiant
+                            {% endif %}
+                        </td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.nom }}</td>
+                        <td>{{ user.prenom }}</td>
+                        <td>
+                            {% if user.isActive == '0' %}
+                                NON
+                            {% endif %}
+                            {% if  user.isActive == '1' %}
+                                OUI
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('user_show', {'id': user.id}) }}">
+                                <button class="btn btn-sm btn-secondary">Afficher</button>
+                            </a>
+
+                            <a href="{{ path('user_edit', {'id': user.id}) }}">
+                                <button class="btn btn-sm btn-primary">Modifier</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+{% endblock %}
+

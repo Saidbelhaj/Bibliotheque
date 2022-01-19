@@ -1,0 +1,19 @@
+{{ form_start(form,  {'attr': {'class': 'form-horizontal'}}) }}
+<fieldset>
+    <div class="control-group">
+        <label class="control-label">{{ form_label(form.titre) }}</label>
+        <div class="controls">
+            {{ form_widget(form.titre, {'attr': {'class': 'input-xlarge'}}) }}
+            <p class="help-block"></p>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ form_label(form.auteur) }}</label>
+        <div class="controls">
+            {{ form_widget(form.auteur, {'attr': {'class': 'input-xlarge'}}) }}
+            <p class="help-block"></p>
+        </div>
+    </div>
+            <button class="btn btn-sm btn-success">{{ button_label|default('Ajouter') }}</button>
+</fieldset>
+{{ form_end(form) }}

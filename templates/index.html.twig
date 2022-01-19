@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="main mt-5">
+        <div class="container text-center">
+            <div class="introduction">
+                <h2>Bienvenue {{ app.user.prenom }} dans le gestionnaire de bibliothèque Universite Centrale</h2>
+                <img src="{{ asset('images/uc.png') }}">
+            </div>
+        </div>
+    </div>
+{% endblock %}
